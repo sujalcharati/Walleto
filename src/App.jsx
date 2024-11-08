@@ -1,11 +1,13 @@
 import './App.css'
+import React from 'react';
+import Landingpage from './Components/Landingpage';
 function App() {
-
   return (
-      <div className="font-extrabold text-6xl flex justify-center items-center h-screen animate-pulse">
-        save your penny!
-      </div>
-  )
+    
+   <div>
+   <Landingpage/>
+   </div>
+  );
 }
 
 export default App
