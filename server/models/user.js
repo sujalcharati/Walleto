@@ -23,5 +23,5 @@ const userschema = new mongoose.Schema({
 //     this.password = bcrypt.hash(this.password, salt);
 //     next();
 //   });
-  
-  export default mongoose.model('user', userschema);
+  const user = mongoose.model('user', userschema);
+  export default user;

@@ -9,12 +9,13 @@ const signup = async (req, res) => {
         });
     }
 
-    await user.create({
+    const User = await user.create({
         email,
         username,
         password
     });
-
+    console.log(User);
+    
     res.status(201).json({
         msg: "you are successfully signed up"
     });
