@@ -16,10 +16,20 @@ const signup = async (req, res) => {
     });
     console.log(User);
     
+    const token = jwt.sign({
+        id : User.id,
+    })
+
     res.status(201).json({
-        msg: "you are successfully signed up"
+        msg: "you are successfully signed up",
+        token
     });
 };
 
-export default signup;
+
+const login = async (req, res) => {
+    // login logic here
+};
+
+export { signup, login };
 
