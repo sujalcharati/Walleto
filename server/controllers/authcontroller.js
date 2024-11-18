@@ -1,3 +1,4 @@
+import User from "../models/user";
 import user from "../models/user"
 
 const signup = async (req, res) => {
@@ -28,7 +29,27 @@ const signup = async (req, res) => {
 
 
 const login = async (req, res) => {
-    // login logic here
+ const {email, password } = req.body;
+ const user = await User.findOne({
+    where:
+        {
+            email
+        }
+    
+ }) 
+ if(!user){
+    res.status(403).json({
+        msg :" user not found"
+    })
+ }
+ const token = jwt.sign({
+    id: User.id,
+ })
+
+ res.status(200).json({
+    msg : " user succesfully logined ",
+    token,
+ })
 };
 
 export { signup, login };
