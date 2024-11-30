@@ -1,5 +1,5 @@
 import User from "../models/user";
-import user from "../models/user"
+import jwt from "jsonwebtoken";
 
 const signup = async (req, res) => {
     const { username, email, password } = req.body;
@@ -10,15 +10,16 @@ const signup = async (req, res) => {
         });
     }
 
-    const User = await user.create({
+    const Userdata = await User.create({
         email,
         username,
-        password
+        password,
+        id
     });
-    console.log(User);
+    console.log(Userdata);
     
     const token = jwt.sign({
-        id : User.id,
+        id : Userdata.id,
     })
 
     res.status(201).json({
@@ -31,19 +32,18 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
  const {email, password } = req.body;
  const user = await User.findOne({
-    where:
-        {
-            email
-        }
-    
+    where: {
+        email,
+        password
+    }
  }) 
  if(!user){
-    res.status(403).json({
+    return res.status(403).json({
         msg :" user not found"
-    })
+    });
  }
  const token = jwt.sign({
-    id: User.id,
+    id: user.id,
  })
 
  res.status(200).json({

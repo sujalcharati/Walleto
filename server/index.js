@@ -7,15 +7,16 @@ dotenv.config();
 connectDB();
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true 
-}));
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     credentials: true 
+// }));
 app.use('/api/auth', authRoutes);
 app.get('/', (req, res) => {
     res.send('Welcome to walleto ');
 });
 
-app.listen(4000, () => {
-    console.log('the server is ready for the start');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
