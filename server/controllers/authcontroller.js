@@ -22,6 +22,7 @@
 //         id : Userdata.id,
 //     })
 
+
 //     res.status(201).json({
 //         msg: "you are successfully signed up",
 //         token
@@ -29,27 +30,27 @@
 // };
 
 
-// const login = async (req, res) => {
-//  const {email, password } = req.body;
-// const user = await User.findOne({
-//     email,
-//     password
-// });
+// // const login = async (req, res) => {
+// //  const {email, password } = req.body;
+// // const user = await User.findOne({
+// //     email,
+// //     password
+// // });
 
-//  if(!user){
-//     return res.status(403).json({
-//         msg :" user not found"
-//     });
-//  }
-//  const token = jwt.sign({
-//     id: user.id,
-//  })
+// //  if(!user){
+// //     return res.status(403).json({
+// //         msg :" user not found"
+// //     });
+// //  }
+// //  const token = jwt.sign({
+// //     id: user.id,
+// //  })
 
-//  res.status(200).json({
-//     msg : " user succesfully logined ",
-//     token,
-//  })
-// };
+// //  res.status(200).json({
+// //     msg : " user succesfully logined ",
+// //     token,
+// //  })
+// // };
 
-// export { signup, login };
+// export { signup };
 
