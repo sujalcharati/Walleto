@@ -1,33 +1,33 @@
-// import User from "../models/user";
-// import jwt from "jsonwebtoken";
+import User from "../models/user.js";
+import jwt from "jsonwebtoken";
 
-// const signup = async (req, res) => {
-//     const { username, email, password } = req.body;
+  const signup = async (req, res) => {
+    const { username, email, password } = req.body;
 
-//     if (!username || !email || !password) {
-//         return res.status(404).json({
-//             msg: "enter all the fields"
-//         });
-//     }
+    if (!username || !email || !password) {
+        return res.status(404).json({
+            msg: "enter all the fields"
+        });
+    }
 
-//     const Userdata = await User.create({
-//         email,
-//         username,
-//         password
+    const Userdata = await User.create({
+        email,
+        username,
+        password
         
-//     });
-//     console.log(Userdata);
+    });
+    console.log(Userdata);
     
-//     const token = jwt.sign({
-//         id : Userdata.id,
-//     })
+    const token = jwt.sign({
+        id : Userdata.id,
+    })
 
 
-//     res.status(201).json({
-//         msg: "you are successfully signed up",
-//         token
-//     });
-// };
+    res.status(201).json({
+        msg: "you are successfully signed up",
+        token
+    });
+};
 
 
 // // const login = async (req, res) => {
@@ -52,5 +52,5 @@
 // //  })
 // // };
 
-// export { signup };
+export default signup ;
 
