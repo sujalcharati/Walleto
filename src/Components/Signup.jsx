@@ -18,7 +18,7 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post('http://localhost:4000/signup', formData);
+    const result = await axios.post('http://localhost:4000/api/auth/signup', formData);
     console.log("Form submitted", result.data);
   };
 
