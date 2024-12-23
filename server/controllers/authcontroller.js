@@ -22,7 +22,10 @@ import jwt from "jsonwebtoken";
         id : Userdata.id,
         secret_key
     })
-
+     
+    if (token){
+        alert(' You are succesfully signed up !')
+    }
 
     res.status(201).json({
         msg: "you are successfully signed up",
