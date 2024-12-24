@@ -19,13 +19,19 @@ export default function Signup() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post('http://localhost:4000/api/auth/signup', formData);
-    const {token} = result.data;
-    localStorage.setItem('authtoken',token);
-    navigate('/home');
-    console.log("Form submitted", result.data);
-    
-
+    try {
+      const result = await axios.post('http://localhost:4000/api/auth/signup', formData);
+      const { token } = result.data;
+      if (token) {
+        localStorage.setItem('authtoken', token);
+        navigate('/home');
+        console.log("Form submitted", result.data);
+      } else {
+        console.error("Token not found in response");
+      }
+    } catch (error) {
+      console.error("Error during signup", error);
+    }
   };
 
   return (

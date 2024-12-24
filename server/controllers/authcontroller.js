@@ -18,10 +18,10 @@ import jwt from "jsonwebtoken";
     });
     console.log(Userdata);
     
-    const token = jwt.sign({
-        id : Userdata.id,
-        secret_key
-    })
+    const token = jwt.sign(
+        { id: Userdata.id },
+        // process.env.secret_key
+    )
      
     if (token){
         alert(' You are succesfully signed up !')
