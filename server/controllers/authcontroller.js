@@ -20,7 +20,7 @@ import jwt from "jsonwebtoken";
     
     const token = jwt.sign(
         { id: Userdata.id },
-        // process.env.secret_key
+        process.env.secret_key
     )
      
     if (token){

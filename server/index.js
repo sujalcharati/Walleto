@@ -14,7 +14,11 @@ connectDB();
 
 app.use('/api/auth', authRoutes);
 
-
+app.get('/',(req,res)=>{
+    const dar ='hi there '
+    res.status(200).send(dar);
+    console.log(' the server is running btw..')
+})
 
 
 app.listen(4000, () => {
