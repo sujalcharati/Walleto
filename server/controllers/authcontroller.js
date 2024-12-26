@@ -23,9 +23,9 @@ import jwt from "jsonwebtoken";
         process.env.secret_key
     )
      
-    if (token){
-        alert(' You are succesfully signed up !')
-    }
+    // if (token){
+    //     alert(' You are succesfully signed up !')
+    // }
 
     res.status(201).json({
         msg: "you are successfully signed up",
