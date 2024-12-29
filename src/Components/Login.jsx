@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -13,10 +15,25 @@ export default function Login() {
             [name]: value,
         });
     };
-
-    const handleSubmit = (e) => {
+         const navigate = useNavigate();
+       
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("Form submitted", formData);
+         try {
+              const result = await axios.post('http://localhost:4000/api/auth/login', formData);
+              const { token } = result.data;
+              if (token) {
+                // localStorage.setItem('authtoken', token);
+                navigate('/home');
+                console.log("Form submitted", result.data);
+              } else {
+                console.error("Token not found in response");
+              }
+            } catch (error) {
+              console.error("Error during login", error);
+            }
+
     };
 
     return (
