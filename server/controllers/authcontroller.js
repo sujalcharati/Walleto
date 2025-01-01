@@ -32,9 +32,9 @@ const saltRounds = 10;
         process.env.secret_key
     )
      
-    // if (token){
-    //     alert(' You are succesfully signed up !')
-    // }
+    if (token){
+        alert(' You are succesfully signed up !')
+    }
 
     res.status(201).json({
         msg: "you are successfully signed up",
@@ -45,10 +45,39 @@ const saltRounds = 10;
 
 const login = async (req, res) => {
  const {email, password } = req.body;
+
+
+async function verifyPassword(password,hashedPassword) {
+    
+try{
+    const matching = await bcrypt.compare(password, hashedPassword);
+    return matching;
+
+
+}
+catch(error){
+    throw new Error("Error verifying password");
+
+}
+}
+
 const user = await User.findOne({
-    email,
-    password
+    email
 });
+
+if (!user) {
+    return res.status(403).json({
+        msg: "user not found"
+    });
+}
+
+const isPasswordValid = await verifyPassword(password, user.password);
+
+if (!isPasswordValid) {
+    return res.status(403).json({
+        msg: "invalid password"
+    });
+}
 
  if(!user){
     return res.status(403).json({
