@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import  { useState } from "react";
-
+import { Popover } from "./Popover";
 
 
 
@@ -20,6 +20,17 @@ const AnimatedSphere = () => {
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPopoverVisible, setPopoverVisible] = useState(false);
+  
+  const handleAddExpenseClick = () => {
+    setPopoverVisible(true);
+   }; 
+   
+
+   const handleClosePopover = () => {
+    setPopoverVisible(false);
+};  
+
 
   const toggleProfile = () => {
     setIsOpen(!isOpen);
@@ -68,6 +79,7 @@ export const Header = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="mx-4 mt-6 px-4 py-2 bg-blue-500 text-white rounded-full"
+            onClick= {handleAddExpenseClick}
           >
             Add Expense
           </motion.button>
@@ -78,6 +90,9 @@ export const Header = () => {
           >
             Add Income
           </motion.button>
+           
+          {isPopoverVisible && <Popover onClose={handleClosePopover} />}
+
           <div className="mt-8">
             <Canvas>
               <ambientLight intensity={0.5} />
@@ -88,6 +103,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
+      {/* <AddExpense /> */}
     </div>
   );
 };
