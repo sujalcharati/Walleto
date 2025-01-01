@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import  { useState } from "react";
-import { Popover } from "./Popover";
+import Popover from "./Popover"; 
 
 
 
