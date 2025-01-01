@@ -1,5 +1,8 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10; 
 
   const signup = async (req, res) => {
     const { username, email, password } = req.body;
@@ -10,11 +13,17 @@ import jwt from "jsonwebtoken";
         });
     }
 
+    async function hashPassword(password) {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        return hashedPassword;
+    }
+
+    const hashedPassword = await hashPassword(password);
+
     const Userdata = await User.create({
         email,
         username,
-        password
-        
+        password: hashedPassword
     });
     console.log(Userdata);
     
