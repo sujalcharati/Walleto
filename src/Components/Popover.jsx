@@ -3,7 +3,10 @@ import React from 'react';
 const Popover = ({ onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-gray-800 shadow-lg rounded-lg p-5 w-96">
+      <div className="bg-gray-800 shadow-lg rounded-lg p-5 w-96 relative">
+        <button onClick={onClose} className="absolute top-2 right-2 text-white text-xl">
+          &times;
+        </button>
         <form>
           <div className="mb-2.5">
             <label className="block mb-1.5 text-white">Amount:</label>
