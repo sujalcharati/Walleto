@@ -6,7 +6,7 @@ import { Summary } from "./Summary";
 import Popover from "./Popover";
 import { FiTrendingUp, FiTrendingDown, FiCreditCard } from "react-icons/fi";
 
-import "./App.css";
+import "../App.css";
 export const Home = () => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
