@@ -128,6 +128,13 @@ const Popover = ({ onClose, onSave }) => {
               <option value="expense">Expense</option>
             </select>
           </div>
+          <div className="mb-2.5">
+            <label className="block mb-1.5 text-white">Date:</label>
+            <input
+              type="date"
+              className="w-full p-2 box-border border border-gray-300 rounded"
+            />
+          </div>
           <div className="flex justify-between">
             <button
               type="submit"
