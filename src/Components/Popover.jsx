@@ -132,6 +132,7 @@ const Popover = ({ onClose, onSave }) => {
             <button
               type="submit"
               className="px-5 py-2 bg-blue-500 text-white border-none rounded cursor-pointer hover:bg-blue-600"
+              value="income"
             >
               Save
             </button>

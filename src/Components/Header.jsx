@@ -7,33 +7,19 @@ import Popover from "./Popover";
 
 
 
-const AnimatedSphere = () => {
-  return (
-    <Sphere args={[1, 100, 200]} scale={2.5}>
-      <meshStandardMaterial color="orange" />
-    </Sphere>
-  );
-};
+// const AnimatedSphere = () => {
+//   return (
+//     <Sphere args={[1, 100, 200]} scale={2.5}>
+//       <meshStandardMaterial color="orange" />
+//     </Sphere>
+//   );
+// };
 
 
 
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isPopoverVisible, setPopoverVisible] = useState(false);
-  
-  const handleAddExpenseClick = () => {
-    setPopoverVisible(true);
-   }; 
-   
-   const handleAddIncomeClick =()=>{
-    setPopoverVisible(true);
-
-   }
-
-   const handleClosePopover = () => {
-    setPopoverVisible(false);
-};  
 
 
   const toggleProfile = () => {
@@ -79,30 +65,15 @@ export const Header = () => {
       </motion.nav>
       <div className="pt-16 flex-1 flex justify-end">
         <div>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="mx-4 mt-6 px-4 py-2 bg-blue-500 text-white rounded-full"
-            onClick= {handleAddExpenseClick}
-          >
-            Add Expense
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="mx-4 mt-6 px-4 py-2 bg-green-500 text-white rounded-full"
-            onClick={ handleAddIncomeClick}
-          >
-            Add Income
-          </motion.button>
+ 
+       
            
-          {isPopoverVisible && <Popover onClose={handleClosePopover} />}
 
           <div className="mt-8">
             <Canvas>
               <ambientLight intensity={0.5} />
               <directionalLight position={[0, 0, 5]} />
-              <AnimatedSphere />
+              {/* <AnimatedSphere /> */}
               <OrbitControls />
             </Canvas>
           </div>
