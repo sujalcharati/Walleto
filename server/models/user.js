@@ -21,4 +21,34 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-export default User;
+
+
+const transactionSchema = new mongoose.Schema({
+    
+        userId: {
+             type: String, 
+             required: true
+             },
+
+        type: { 
+            type: String, 
+            enum: ['income', 'expense'], required: true 
+        },
+        amount: 
+             { type: Number, 
+                required: true 
+            },
+
+        description: {
+             type: String 
+             },
+        date: { 
+             type: Date,
+         default: Date.now
+         },
+     
+      
+      
+})
+const Transaction = mongoose.model('Transaction', transactionSchema);
+export { Transaction, User };
