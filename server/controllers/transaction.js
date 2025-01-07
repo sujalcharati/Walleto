@@ -1,17 +1,19 @@
-import Transaction from "../models/transaction";
+import Transaction from "../models/transaction.js";
+import jwt from "jsonwebtoken";
 
 const transaction = async (req ,res)=>{
     try {
-        // const transaction = new Transaction(req.body);
+       
         const { amount, description ,type ,date }= req.body;
        
         const userId = req.user._id; // Assuming user ID is available in req.user
         const transactionData = await Transaction.create({
+          userId,
             amount,
             description,
             type,
             date,
-            user: userId
+            // user: userId
         });
 
         console.log(transactionData);
@@ -20,8 +22,10 @@ const transaction = async (req ,res)=>{
             process.env.secret_key
          )
         // const token = req.headers.authorization.split(' ')[1];
-        res.status(201).send(transactionData , token);
+        res.status(201).json(transactionData , token);
       } catch (error) {
-        res.status(400).send(error);
+        res.status(400).json(error);
       }
 }
+
+export default transaction
