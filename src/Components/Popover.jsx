@@ -10,8 +10,8 @@ const Popover = ({ onClose, onSave }) => {
     e.preventDefault();
     const parsedAmount = parseFloat(amount);
     if (!isNaN(parsedAmount) && parsedAmount > 0) {
-      onSave(type, parsedAmount);
-      onClose();
+      // onSave(type, parsedAmount);
+      // onClose();
     } else {
       alert("Please enter a valid amount!");
     }
@@ -22,20 +22,23 @@ const Popover = ({ onClose, onSave }) => {
         type,
         date: new Date().toISOString().split('T')[0] // Assuming you want to send the current date
         };
-        const result = await axios.post('http://localhost:4000/api/transaction/transaction', formData);
-        const { token } = result.data;
-        if (token) {
-          localStorage.setItem('authtoken', token);
-          // navigate('/home');
-          console.log("Form submitted", result.data);
-        } else {
-          console.error("Token not found in response");
-        }
+
+        const token = localStorage.getItem("authtoken");
+
+      const result = await axios.post('http://localhost:4000/api/transaction/transaction', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Transaction saved:", result.data);
+
+      onSave(type, parsedAmount);
+        onClose();
       } catch (error) {
         console.error("Error during transaction", error);
       }
           
-  };
+  }; 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
