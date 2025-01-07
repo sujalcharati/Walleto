@@ -10,8 +10,8 @@ const Popover = ({ onClose, onSave }) => {
     e.preventDefault();
     const parsedAmount = parseFloat(amount);
     if (!isNaN(parsedAmount) && parsedAmount > 0) {
-      // onSave(type, parsedAmount);
-      // onClose();
+      onSave(type, parsedAmount);
+      onClose();
     } else {
       alert("Please enter a valid amount!");
     }
@@ -32,8 +32,8 @@ const Popover = ({ onClose, onSave }) => {
       });
       console.log("Transaction saved:", result.data);
 
-      onSave(type, parsedAmount);
-        onClose();
+      // onSave(type, parsedAmount);
+      //   onClose();
       } catch (error) {
         console.error("Error during transaction", error);
       }
@@ -68,7 +68,7 @@ const Popover = ({ onClose, onSave }) => {
               className="w-full p-2 box-border border border-gray-300 rounded"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            />
+            /> 
           </div>
           <div className="mb-2.5">
             <label className="block mb-1.5 text-white">Type:</label>

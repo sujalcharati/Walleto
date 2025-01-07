@@ -27,5 +27,18 @@ const transaction = async (req ,res)=>{
         res.status(400).json(error);
       }
 }
+export const getTransactions = async (req, res) =>{
+try {
+
+  const userId = req.user._id;
+  const transactions= await Transaction.find({userId});
+  res.status(200).json(transactions);
+}
+catch( error){
+  console.error('error in fetching transactions :', error)
+res.status(400).json({   error : error.message})
+}
+}
+
 
 export default transaction
