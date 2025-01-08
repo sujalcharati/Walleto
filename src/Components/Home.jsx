@@ -24,6 +24,8 @@ export const Home = () => {
     }
   };
 
+  
+
   return (
     <div className="bg-gray-800 min-h-screen flex flex-col">
       <Header />
@@ -55,7 +57,7 @@ export const Home = () => {
       >
         Add Transaction
       </button>
-      </div>
+      </div> 
       <Transaction />
       <div className="animated-sphere"></div>
       {isPopoverOpen && (

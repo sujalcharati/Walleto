@@ -32,24 +32,14 @@ const transaction = async (req ,res)=>{
             description,
             type,
             date,
-            // user: userId
         });
            
 
-        user.transactions.push( transactionData);
-        user.save();
+        // user.transactions.push( transactionData);
+        // await user.save();
 
 
-        // console.log(transactionData);
-        //  const token = jwt.sign(
-        //     { id: user.id },
-        //     process.env.secret_key
-        //  )
-        // const token = req.headers.authorization.split(' ')[1];
-      //   res.status(201).json(transactionData , token);
-      // } catch (error) {
-      //   res.status(400).json(error);
-      // }
+        console.log(transactionData);
       return res.status(200).json({
         success: true,
         message: "Transaction Added Successfully",
