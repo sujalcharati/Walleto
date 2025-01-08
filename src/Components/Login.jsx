@@ -24,7 +24,8 @@ export default function Login() {
               const result = await axios.post('http://localhost:4000/api/auth/login', formData);
               const { token } = result.data;
               if (token) {
-                // localStorage.setItem('authtoken', token);
+                localStorage.setItem('authtoken', token);
+                console.log(token);
                 navigate('/home');
                 console.log("Form submitted", result.data);
               } else {

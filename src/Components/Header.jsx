@@ -7,22 +7,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Popover from "./Popover"; 
 
-
-
-// const AnimatedSphere = () => {
-//   return (
-//     <Sphere args={[1, 100, 200]} scale={2.5}>
-//       <meshStandardMaterial color="orange" />
-//     </Sphere>
-//   );
-// };
-
-
-
-
-
-
-
   export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(null);
@@ -32,14 +16,23 @@ import Popover from "./Popover";
     };
 
     useEffect(() => {
-      // Fetch user data from the database
-      axios.get("http://localhost:4000/api/transaction/getTransactions")
-        .then(response => {
-          setUser(response.data);
-        })
-        .catch(error => {
-          console.error("Error fetching user data:", error);
-        });
+      const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("authtoken");
+        if (!token) {
+          console.error("No token found in localStorage");
+          return;
+        }
+        console.log("Token from storage:", token);
+
+        const response = await axios.get("http://localhost:4000/api/transaction/getTransactions",  { headers: { Authorization: `Bearer ${token}` }});
+        setUser(response.data); 
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+      };
+
+      fetchUserData();
     }, []);
 
     return (
@@ -66,8 +59,8 @@ import Popover from "./Popover";
                 {isOpen && user && user.username && user.email && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
                     <div className="px-4 py-2 text-gray-800">
-                      <p className="font-medium">{user.username}</p>
-                      <p className="text-sm">{user.email}</p>
+                      {user.username && <p className="font-medium">{user.username}</p>}
+                      {user.email && <p className="text-sm">{user.email}</p>}
                     </div>
                    
                     </div>
