@@ -29,6 +29,11 @@ const transaction = async (req ,res)=>{
 }
 export const getTransactions = async (req, res) =>{
 try {
+ 
+
+  if (!req.user) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  } 
 
   const userId = req.user._id;
   const transactions= await Transaction.find({userId});

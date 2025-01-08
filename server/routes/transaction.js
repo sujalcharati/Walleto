@@ -6,6 +6,6 @@ import { authenticateUser } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 router.post('/transaction',authenticateUser ,transaction);
-router.get('/transaction',authenticateUser ,getTransactions)
+router.get('/getTransactions',authenticateUser ,getTransactions)
 
 export default router;

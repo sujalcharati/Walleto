@@ -8,7 +8,8 @@ export const authenticateUser = (req, res, next) => {
       return res.status(401).json({ error: "No token provided." });
     }
 
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.secret_key);
+    console.log("Decoded Token:", decoded);
     req.user = { _id: decoded.id }; // Add user data to req
     next();
   } catch (error) {
