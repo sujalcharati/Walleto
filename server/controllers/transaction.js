@@ -3,7 +3,14 @@ import User from "../models/user.js";
 const transaction = async (req ,res)=>{
     try {
        
-        const { amount, description ,type ,date }= req.body;
+        let { amount, description ,type ,date }= req.body;
+        amount = parseFloat(amount);
+        if (isNaN(amount)) {
+          return res.status(400).json({
+            success: false,
+            message: "Amount must be a number",
+          });
+        }
        
         const userId = req.user._id; // Assuming user ID is available in req.user
 
