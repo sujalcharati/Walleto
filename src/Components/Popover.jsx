@@ -14,30 +14,31 @@ const Popover = ({ onClose, onSave }) => {
       onClose();
     } else {
       alert("Please enter a valid amount!");
+      return;
     }
-      // try {  
-      //   const formData = {
-      //   amount: parsedAmount,
-      //   description,
-      //   type,
-      //   date: new Date().toISOString().split('T')[0] // Assuming you want to send the current date
-      //   };
+    try {  
+      const formData = {
+        amount: parsedAmount,
+        description,
+        type,
+        date: new Date().toISOString().split('T')[0] 
+      };
 
-      //   const token = localStorage.getItem("authtoken");
-      //   console.log(token)
+      const token = localStorage.getItem("authtoken");
+      console.log(token);
 
-      // const result = await axios.post('http://localhost:4000/api/transaction/transaction', formData, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // });
-      // console.log("Transaction saved:", result.data);
+      const result = await axios.post('http://localhost:4000/api/transaction/transaction', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Transaction saved:", result.data);
 
-      // // onSave(type, parsedAmount);
-      // //   onClose();
-      // } catch (error) {
-      //   console.error("Error during transaction", error);
-      // }
+      // onSave(type, parsedAmount);
+      //   onClose();
+    } catch (error) {
+      console.error("Error during transaction", error);
+    }
           
   }; 
 

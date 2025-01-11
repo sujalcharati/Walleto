@@ -30,19 +30,24 @@ export const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const token = localStorage.getItem('authtoken');
-        if(!token){
+        if (!token) {
           console.error("No token found in localStorage");
           return;
         }
-        const response = await axios.get(" http://localhost:4000/api/transaction/getTransactions", { headers: { Authorization: `Bearer ${token}` }});
+        const response = await axios.get("http://localhost:4000/api/transaction/getTransactions", { headers: { Authorization: `Bearer ${token}` }});
 
+        const transactions = response.data.transactions;
+        const income = transactions
+          .filter(transaction => transaction.type === 'income')
+          .reduce((acc, transaction) => acc + transaction.amount, 0);
+        const expense = transactions
+          .filter(transaction => transaction.type === 'expense')
+          .reduce((acc, transaction) => acc + transaction.amount, 0);
 
-        // const data = await response.json();
-        setIncome(response.data.income);
-        setExpense(response.data.expense);
-        // setBalance(data.balance);
+        setIncome(income);
+        setExpense(expense);
+        setBalance(income - expense);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
