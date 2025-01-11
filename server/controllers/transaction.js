@@ -4,15 +4,15 @@ const transaction = async (req ,res)=>{
     try {
        
         let { amount, description ,type ,date }= req.body;
-        amount = parseFloat(amount);
-        if (isNaN(amount)) {
-          return res.status(400).json({
-            success: false,
-            message: "Amount must be a number",
-          });
-        }
+        // amount = parseFloat(amount);
+        // if (isNaN(amount)) {
+        //   return res.status(400).json({
+        //     success: false,
+        //     message: "Amount must be a number",
+        //   });
+        // }
        
-        const userId = req.user._id; // Assuming user ID is available in req.user
+        const userId = req.user._id;
 
 
         if (!amount || !description || !date || !type) {
@@ -74,6 +74,12 @@ try {
   const response = {
     transactions,
     username: user.username,
+    Income: transactions
+      .filter(transaction => transaction.type === 'income')
+      .reduce((acc, transaction) => acc + transaction.amount, 0),
+    Expense: transactions
+      .filter(transaction => transaction.type === 'expense')
+      .reduce((acc, transaction) => acc + transaction.amount, 0),
     email: user.email
   };
   res.status(200).json(response);
