@@ -3,6 +3,7 @@ import { Header } from "./Header";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import TransactionTable from "./TransactionTable";
 
 export default  function Transaction(){
     const [startDate, setStartDate] = useState(new Date());
@@ -22,6 +23,7 @@ export default  function Transaction(){
                     />
                 </div>
             </div>
+                < TransactionTable/>
         </div>
     );
     }

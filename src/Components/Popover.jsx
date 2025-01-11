@@ -34,8 +34,7 @@ const Popover = ({ onClose, onSave }) => {
       });
       console.log("Transaction saved:", result.data);
 
-      // onSave(type, parsedAmount);
-      //   onClose();
+    
     } catch (error) {
       console.error("Error during transaction", error);
     }
@@ -97,6 +96,21 @@ const Popover = ({ onClose, onSave }) => {
               value="income"
             >
               Save
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                const transaction = {
+                  type,
+                  amount,
+                  description,
+                  date: new Date().toISOString().split('T')[0]
+                };
+                onSave(transaction);
+              }}
+              className="px-5 py-2 bg-green-500 text-white border-none rounded cursor-pointer hover:bg-green-600"
+            >
+              Generate Transaction
             </button>
             <button
               type="button"
