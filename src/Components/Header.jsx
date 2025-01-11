@@ -47,7 +47,7 @@ import { useEffect, useState } from "react";
             <div className="flex justify-between items-center h-16">
               <div className="hidden md:flex space-x-4">
                 <a href="#" className="text-white hover:text-gray-200"> Walleto</a>
-                <a href="#" className="text-white hover:text-gray-200">Home</a>
+                <Link to="/home" className="text-white hover:text-gray-200">Home</Link>
                 <Link to="/transaction" className="text-white hover:text-gray-200">Transactions </Link>
               </div>
               <div className="relative flex items-center space-x-4 cursor-pointer" onClick={toggleProfile}>
