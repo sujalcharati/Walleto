@@ -88,7 +88,6 @@ export const Home = () => {
           Add Transaction
         </button>
       </div>
-      <Transaction />
       <div className="animated-sphere"></div>
       {isPopoverOpen && (
         <Popover onClose={() => setIsPopoverOpen(false)} onSave={updateValues} />

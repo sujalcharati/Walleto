@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 import { useEffect, useState } from "react";
-import Popover from "./Popover"; 
 
   export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +48,7 @@ import Popover from "./Popover";
               <div className="hidden md:flex space-x-4">
                 <a href="#" className="text-white hover:text-gray-200"> Walleto</a>
                 <a href="#" className="text-white hover:text-gray-200">Home</a>
-                <a href="#" className="text-white hover:text-gray-200">Transactions</a>
+                <Link to="/transaction" className="text-white hover:text-gray-200">Transactions </Link>
               </div>
               <div className="relative flex items-center space-x-4 cursor-pointer" onClick={toggleProfile}>
                 <img
@@ -75,13 +75,11 @@ import Popover from "./Popover";
               <Canvas>
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[0, 0, 5]} />
-                {/* <AnimatedSphere /> */}
                 <OrbitControls />
               </Canvas>
             </div>
           </div>
         </div>
-        {/* <AddExpense /> */}
       </div>
     );
   };
