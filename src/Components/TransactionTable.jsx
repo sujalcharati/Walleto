@@ -1,11 +1,7 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip } from "@mui/material";
-import { useEffect, useState } from 'react';
 
-function TransactionTable() {
- 
-
-const [transactions, setTransactions] = useState([]);
+function TransactionTable({transactions}) {
 
 
   return (

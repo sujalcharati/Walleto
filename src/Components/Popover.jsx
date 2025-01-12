@@ -11,6 +11,13 @@ const Popover = ({ onClose, onSave }) => {
     const parsedAmount = parseFloat(amount);
     if (!isNaN(parsedAmount) && parsedAmount > 0) {
       onSave(type, parsedAmount);
+      const newTransaction = {
+        type,
+        amount: parsedAmount,
+        description,
+        date: new Date().toISOString().split("T")[0],
+      };
+      addTransaction(newTransaction);
       onClose();
     } else {
       alert("Please enter a valid amount!");
@@ -97,21 +104,7 @@ const Popover = ({ onClose, onSave }) => {
             >
               Save
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                const transaction = {
-                  type,
-                  amount,
-                  description,
-                  date: new Date().toISOString().split('T')[0]
-                };
-                onSave(transaction);
-              }}
-              className="px-5 py-2 bg-green-500 text-white border-none rounded cursor-pointer hover:bg-green-600"
-            >
-              Generate Transaction
-            </button>
+        
             <button
               type="button"
               onClick={onClose}

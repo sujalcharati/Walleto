@@ -4,9 +4,13 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TransactionTable from "./TransactionTable";
+import { useTransactions } from "./TransactionsContext";
+
 
 export default  function Transaction(){
     const [startDate, setStartDate] = useState(new Date());
+    const { transactions } = useTransactions();
+
 
     return (
         <div className="bg-black min-h-screen">
@@ -23,7 +27,7 @@ export default  function Transaction(){
                     />
                 </div>
             </div>
-                < TransactionTable/>
+            <TransactionTable transactions={transactions} />
         </div>
     );
     }

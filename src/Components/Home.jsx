@@ -11,8 +11,9 @@ export const Home = () => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [balance, setBalance] = useState(0);
-
+  const [transaction,setTransactions]=useState([]);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+ 
 
   const updateValues = (type, amount) => {
     if (type === "income") {
@@ -24,7 +25,9 @@ export const Home = () => {
     }
   };
 
-  
+  const addtransaction = (transaction) =>{
+    setTransactions((previous)=> [...previous,transaction])
+  }
 
 
   useEffect(() => {
@@ -90,7 +93,10 @@ export const Home = () => {
       </div>
       <div className="animated-sphere"></div>
       {isPopoverOpen && (
-        <Popover onClose={() => setIsPopoverOpen(false)} onSave={updateValues} />
+        <Popover onClose={() => setIsPopoverOpen(false)} onSave={(type, amount, description, date) => {
+          updateValues(type, amount);
+          addtransaction({ type, amount, description, date });
+        }} />
       )}
     </div>
   );
