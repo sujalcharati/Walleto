@@ -1,17 +1,19 @@
 import axios from "axios";
-import React, { useState , useEffect} from "react";
-import Transaction from "./Transaction";
+import React, { useState, useEffect } from "react";
 import { Header } from "./Header";
 import { Summary } from "./Summary";
 import Popover from "./Popover";
 import { FiTrendingUp, FiTrendingDown, FiCreditCard } from "react-icons/fi";
+import { createContext } from 'react';
 
 import "../App.css";
+
+export const TransactionsContext = createContext();
 export const Home = () => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [balance, setBalance] = useState(0);
-  const [transaction,setTransactions]=useState([]);
+  const [transactions,setTransactions]=useState([]);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
  
 
@@ -25,7 +27,7 @@ export const Home = () => {
     }
   };
 
-  const addtransaction = (transaction) =>{
+    const addtransaction = (transaction) => {
     setTransactions((previous)=> [...previous,transaction])
   }
 
@@ -60,6 +62,7 @@ export const Home = () => {
   }, []);
 
   return (
+    <TransactionsContext.Provider value={ transactions }>
     <div className="bg-gray-800 min-h-screen flex flex-col">
       <Header />
       <div className="flex-grow bg-black p-6">
@@ -99,5 +102,6 @@ export const Home = () => {
         }} />
       )}
     </div>
+    </TransactionsContext.Provider>
   );
 };

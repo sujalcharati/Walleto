@@ -1,7 +1,6 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip } from "@mui/material";
-
-function TransactionTable({transactions}) {
+function TransactionTable({ transactions = [] }) {
 
 
   return (

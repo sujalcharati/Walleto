@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from 'axios';
 
-const Popover = ({ onClose, onSave }) => {
+
+const Popover = ({ onClose, onSave  }) => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("income");
@@ -17,7 +18,7 @@ const Popover = ({ onClose, onSave }) => {
         description,
         date: new Date().toISOString().split("T")[0],
       };
-      addTransaction(newTransaction);
+      // addtransaction(newTransaction);
       onClose();
     } else {
       alert("Please enter a valid amount!");

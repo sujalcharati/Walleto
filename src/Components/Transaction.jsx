@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Header } from "./Header";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TransactionTable from "./TransactionTable";
-import { useTransactions } from "./TransactionsContext";
+import { TransactionsContext } from "./Home";
 
 
 export default  function Transaction(){
     const [startDate, setStartDate] = useState(new Date());
-    const { transactions } = useTransactions();
+    const transactions = useContext(TransactionsContext);
 
 
     return (
