@@ -12,6 +12,7 @@ const Popover = ({ onClose, onSave  }) => {
     const parsedAmount = parseFloat(amount);
     if (!isNaN(parsedAmount) && parsedAmount > 0) {
       onSave(type, parsedAmount);
+      
       const newTransaction = {
         type,
         amount: parsedAmount,
@@ -19,6 +20,8 @@ const Popover = ({ onClose, onSave  }) => {
         date: new Date().toISOString().split("T")[0],
       };
       // addtransaction(newTransaction);
+      onSave(newTransaction.type, newTransaction.amount, newTransaction);
+
       onClose();
     } else {
       alert("Please enter a valid amount!");
@@ -68,7 +71,7 @@ const Popover = ({ onClose, onSave  }) => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
-          </div>
+          </div> 
           <div className="mb-2.5">
             <label className="block mb-1.5 text-white">Description:</label>
             <input
