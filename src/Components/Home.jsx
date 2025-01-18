@@ -14,6 +14,8 @@ export const Home = () => {
   const [expense, setExpense] = useState(0);
   const [balance, setBalance] = useState(0);
   const [transactions,setTransactions]=useState([]);
+  const [transactionList, setTransactionList] = useState([]);
+  // console.log(transactionList);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
  
 
@@ -60,9 +62,18 @@ export const Home = () => {
 
     fetchData();
   }, []);
+   
+  const addTransaction = (formData) => {
+    setTransactionList(prev => [...prev, {
+      ...formData,
+      type: formData.type.charAt(0).toUpperCase() + formData.type.slice(1)
+    }]);
+  };
+
+
 
   return (
-    <TransactionsContext.Provider value={transactions}>
+    <TransactionsContext.Provider value={{ transactionList, addTransaction }}>
       <div className="bg-gray-800 min-h-screen flex flex-col">
         <Header />
         <div className="flex-grow bg-black p-6">
@@ -96,10 +107,11 @@ export const Home = () => {
         </div>
         <div className="animated-sphere"></div>
         {isPopoverOpen && (
-          <Popover onClose={() => setIsPopoverOpen(false)} onSave={(type, amount) => {
+          <Popover onClose={() => setIsPopoverOpen(false)} onSave={(type, amount,formData) => {
             updateValues(type, amount);
-            const newTransaction = { type, amount };
-            setTransactions((prevTransactions) => [...prevTransactions, newTransaction]);
+            addTransaction(formData);
+            // const newTransaction = { type, amount };
+            // setTransactionList((prevTransactions) => [...prevTransactions, newTransaction]);
           }} />
         )}
       </div>

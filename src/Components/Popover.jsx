@@ -1,33 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from 'axios';
+import { TransactionsContext } from "./Home";
 
 
 const Popover = ({ onClose, onSave  }) => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("income");
+  // const {addTransaction} =useContext(TransactionsContext);
 
   const handleSave = async  (e) => {
     e.preventDefault();
     const parsedAmount = parseFloat(amount);
     if (!isNaN(parsedAmount) && parsedAmount > 0) {
-      onSave(type, parsedAmount);
       
-      const newTransaction = {
-        type,
-        amount: parsedAmount,
-        description,
-        date: new Date().toISOString().split("T")[0],
-      };
-      // addtransaction(newTransaction);
-      onSave(newTransaction.type, newTransaction.amount, newTransaction);
-
-      onClose();
-    } else {
-      alert("Please enter a valid amount!");
-      return;
-    }
-    try {  
       const formData = {
         amount: parsedAmount,
         description,
@@ -35,6 +21,7 @@ const Popover = ({ onClose, onSave  }) => {
         date: new Date().toISOString().split('T')[0] 
       };
 
+try {
       const token = localStorage.getItem("authtoken");
       console.log(token);
 
@@ -44,13 +31,23 @@ const Popover = ({ onClose, onSave  }) => {
         },
       });
       console.log("Transaction saved:", result.data);
+     
+      if (result.data) {
+        // addTransaction(formData);
+        onSave(type, parsedAmount, formData);
+        onClose();
+      }
 
     
     } catch (error) {
       console.error("Error during transaction", error);
     }
           
-  }; 
+  }
+  else {
+    alert('please enter a valid amount!');
+  }
+}; 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

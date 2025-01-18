@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip } from "@mui/material";
-function TransactionTable({ transactions = [] }) {
+function TransactionTable({ transactionList = [] }) {
   return (
     <TableContainer component={Paper} style={{ backgroundColor: "#121212", color: "#ffffff" }}>
       <Table>
@@ -13,14 +13,14 @@ function TransactionTable({ transactions = [] }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactions.length === 0 ? (
+          {transactionList.length === 0 ? (
             <TableRow>
               <TableCell colSpan={4} style={{ color: "#ffffff", textAlign: "center" }}>
                 No transactions available
               </TableCell>
             </TableRow>
           ) : (
-            transactions.map((row, index) => (
+            transactionList.map((row, index) => (
               <TableRow key={index}>
                 <TableCell style={{ color: "#ffffff" }}>{row.description}</TableCell>
                 <TableCell style={{ color: "#ffffff" }}>{row.date}</TableCell>
@@ -28,7 +28,7 @@ function TransactionTable({ transactions = [] }) {
                   <Chip
                     label={row.type}
                     style={{
-                      backgroundColor: row.type === "Expense" ? "#8B0000" : "#006400",
+                      backgroundColor: row.type === "expense" ? "#8B0000" : "#006400",
                       color: "#ffffff",
                     }}
                   />

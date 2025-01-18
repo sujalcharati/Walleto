@@ -9,8 +9,8 @@ import { TransactionsContext } from "./Home";
 
 export default  function Transaction(){
     const [startDate, setStartDate] = useState(new Date());
-    const transactions = useContext(TransactionsContext);
-    console.log(transactions);
+    const transactionList = useContext(TransactionsContext);
+    console.log(transactionList);
 
     return (
         <div className="bg-black min-h-screen">
@@ -28,7 +28,7 @@ export default  function Transaction(){
                 </div>
             </div>
             
-            <TransactionTable transactions={transactions} />
+            <TransactionTable transactionList={transactionList} />
         </div>
     );
     }
