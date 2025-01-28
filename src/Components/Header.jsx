@@ -53,7 +53,7 @@ import { useEffect, useState } from "react";
               <div className="relative flex items-center space-x-4 cursor-pointer" onClick={toggleProfile}>
                 <img
                   alt="Profile"
-                  src={user ? user.avatar : "https://www.w3schools.com/howto/img_avatar.png"}
+                  src={ "https://www.w3schools.com/howto/img_avatar.png"}
                   className="w-10 h-10 rounded-full"
                 />
                 {isOpen && user && user.username && user.email && (

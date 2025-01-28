@@ -4,7 +4,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TransactionTable from "./TransactionTable";
-import { TransactionsContext } from "./Home";
+import { TransactionsContext } from "./TransactionsProvider";
 
 
 export default  function Transaction(){

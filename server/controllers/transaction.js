@@ -4,14 +4,7 @@ const transaction = async (req ,res)=>{
     try {
        
         let { amount, description ,type ,date }= req.body;
-        // amount = parseFloat(amount);
-        // if (isNaN(amount)) {
-        //   return res.status(400).json({
-        //     success: false,
-        //     message: "Amount must be a number",
-        //   });
-        // }
-       
+     
         const userId = req.user._id;
 
 

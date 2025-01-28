@@ -8,12 +8,12 @@ import { createContext } from 'react';
 
 import "../App.css";
 
-export const TransactionsContext = createContext();
+// export const TransactionsContext = createContext();
 export const Home = () => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [balance, setBalance] = useState(0);
-  const [transactions,setTransactions]=useState([]);
+  // const [transactions,setTransactions]=useState([]);
   const [transactionList, setTransactionList] = useState([]);
   // console.log(transactionList);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -64,16 +64,24 @@ export const Home = () => {
   }, []);
    
   const addTransaction = (formData) => {
-    setTransactionList(prev => [...prev, {
+    if (!formData || !formData.type || !formData.amount) {
+      console.error("Invalid formData:", formData);
+      return;
+    }
+
+    const updatedTransaction = {
       ...formData,
       type: formData.type.charAt(0).toUpperCase() + formData.type.slice(1)
-    }]);
+    };
+
+    setTransactionList(prev => [...prev, updatedTransaction]);
+    console.log("Updated Transaction List:", [...transactionList, updatedTransaction]);
   };
 
 
 
   return (
-    <TransactionsContext.Provider value={{ transactionList, addTransaction }}>
+    // <TransactionsContext.Provider value={{ transactionList, addTransaction }}>
       <div className="bg-gray-800 min-h-screen flex flex-col">
         <Header />
         <div className="flex-grow bg-black p-6">
@@ -107,14 +115,12 @@ export const Home = () => {
         </div>
         <div className="animated-sphere"></div>
         {isPopoverOpen && (
-          <Popover onClose={() => setIsPopoverOpen(false)} onSave={(type, amount,formData) => {
-            updateValues(type, amount);
+          <Popover onClose={() => setIsPopoverOpen(false)} onSave={(formData) => {
+            updateValues(formData.type, formData.amount);
             addTransaction(formData);
-            // const newTransaction = { type, amount };
-            // setTransactionList((prevTransactions) => [...prevTransactions, newTransaction]);
           }} />
         )}
       </div>
-    </TransactionsContext.Provider>
+    // </TransactionsContext.Provider>
   );
 };

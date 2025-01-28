@@ -6,8 +6,11 @@ import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import { Home } from "./Components/Home";
 import Transaction from "./Components/Transaction";
+import { TransactionsProvider } from "./Components/TransactionsProvider";
+
 function App() {
   return (
+    <TransactionsProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landingpage />} />
@@ -17,6 +20,8 @@ function App() {
         <Route path="/transaction" element={<Transaction/>}/>
       </Routes>
     </BrowserRouter>
+    </TransactionsProvider>
+
   );
 }
 

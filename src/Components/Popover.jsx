@@ -1,53 +1,50 @@
 import React, { useContext, useState } from "react";
 import axios from 'axios';
-import { TransactionsContext } from "./Home";
+import { TransactionsContext } from "./TransactionsProvider";
 
 
-const Popover = ({ onClose, onSave  }) => {
+const Popover = ({ onClose, onSave }) => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("income");
-  // const {addTransaction} =useContext(TransactionsContext);
+  const { addTransaction } = useContext(TransactionsContext);
 
-  const handleSave = async  (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     const parsedAmount = parseFloat(amount);
     if (!isNaN(parsedAmount) && parsedAmount > 0) {
-      
       const formData = {
         amount: parsedAmount,
         description,
         type,
-        date: new Date().toISOString().split('T')[0] 
+        date: new Date().toISOString().split('T')[0]
       };
 
-try {
-      const token = localStorage.getItem("authtoken");
-      console.log(token);
+      try {
+        const token = localStorage.getItem("authtoken");
+        console.log(token);
 
-      const result = await axios.post('http://localhost:4000/api/transaction/transaction', formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log("Transaction saved:", result.data);
-     
-      if (result.data) {
-        // addTransaction(formData);
-        onSave(type, parsedAmount, formData);
-        onClose();
+        const result = await axios.post('http://localhost:4000/api/transaction/transaction', formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("Transaction saved:", result.data);
+
+        if (result.data) {
+          addTransaction(formData);
+          onSave(formData);
+          onClose();
+        }
+
+      } catch (error) {
+        console.error("Error during transaction", error);
       }
 
-    
-    } catch (error) {
-      console.error("Error during transaction", error);
+    } else {
+      alert('please enter a valid amount!');
     }
-          
-  }
-  else {
-    alert('please enter a valid amount!');
-  }
-}; 
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -68,7 +65,7 @@ try {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
-          </div> 
+          </div>
           <div className="mb-2.5">
             <label className="block mb-1.5 text-white">Description:</label>
             <input
@@ -77,7 +74,7 @@ try {
               className="w-full p-2 box-border border border-gray-300 rounded"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            /> 
+            />
           </div>
           <div className="mb-2.5">
             <label className="block mb-1.5 text-white">Type:</label>
@@ -92,7 +89,7 @@ try {
           </div>
           <div className="mb-2.5">
             <label className="block mb-1.5 text-white">Date:</label>
-            <input 
+            <input
               type="date"
               className="w-full p-2 box-border border border-gray-300 rounded"
             />
@@ -105,7 +102,7 @@ try {
             >
               Save
             </button>
-        
+
             <button
               type="button"
               onClick={onClose}
