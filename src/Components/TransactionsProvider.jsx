@@ -55,6 +55,8 @@ export const TransactionsProvider = ({ children }) => {
     };
 
     setTransactionList((prev) => [...prev, updatedTransaction]);
+    const transactionList = [...transactionList, updatedTransaction];
+    console.log("list", transactionList)
 
     if (formData.type === "income") {
       setIncome((prev) => prev + formData.amount);
@@ -67,7 +69,7 @@ export const TransactionsProvider = ({ children }) => {
 
   return (
     <TransactionsContext.Provider
-      value={{ transactionList, addTransaction, income, expense, balance }}
+      value={{ transactionList, addTransaction,expense ,income,balance}}
     >
       {children}
     </TransactionsContext.Provider>

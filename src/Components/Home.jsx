@@ -1,21 +1,23 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Header } from "./Header";
 import { Summary } from "./Summary";
 import Popover from "./Popover";
 import { FiTrendingUp, FiTrendingDown, FiCreditCard } from "react-icons/fi";
-import { createContext } from 'react';
+import { TransactionsContext } from "./TransactionsProvider";
+
 
 import "../App.css";
 
 // export const TransactionsContext = createContext();
 export const Home = () => {
-  const [income, setIncome] = useState(0);
-  const [expense, setExpense] = useState(0);
-  const [balance, setBalance] = useState(0);
+  // const [income, setIncome] = useState(0);
+  // const [expense, setExpense] = useState(0);
+  // const [balance, setBalance] = useState(0);
   // const [transactions,setTransactions]=useState([]);
-  const [transactionList, setTransactionList] = useState([]);
+  // const [transactionList, setTransactionList] = useState([]);
   // console.log(transactionList);
+    const { income, expense, balance, setIncome, setExpense, setBalance, transactionList, setTransactionList } = useContext(TransactionsContext);
+
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
  
 
@@ -34,34 +36,34 @@ export const Home = () => {
   // }
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('authtoken');
-        if (!token) {
-          console.error("No token found in localStorage");
-          return;
-        }
-        const response = await axios.get("http://localhost:4000/api/transaction/getTransactions", { headers: { Authorization: `Bearer ${token}` }});
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const token = localStorage.getItem('authtoken');
+  //       if (!token) {
+  //         console.error("No token found in localStorage");
+  //         return;
+  //       }
+  //       const response = await axios.get("http://localhost:4000/api/transaction/getTransactions", { headers: { Authorization: `Bearer ${token}` }});
 
-        const transactions = response.data.transactions;
-        const income = transactions
-          .filter(transaction => transaction.type === 'income')
-          .reduce((acc, transaction) => acc + transaction.amount, 0);
-        const expense = transactions
-          .filter(transaction => transaction.type === 'expense')
-          .reduce((acc, transaction) => acc + transaction.amount, 0);
+  //       const transactions = response.data.transactions;
+  //       const income = transactions
+  //         .filter(transaction => transaction.type === 'income')
+  //         .reduce((acc, transaction) => acc + transaction.amount, 0);
+  //       const expense = transactions
+  //         .filter(transaction => transaction.type === 'expense')
+  //         .reduce((acc, transaction) => acc + transaction.amount, 0);
 
-        setIncome(income);
-        setExpense(expense);
-        setBalance(income - expense);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       setIncome(income);
+  //       setExpense(expense);
+  //       setBalance(income - expense);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
    
   const addTransaction = (formData) => {
     if (!formData || !formData.type || !formData.amount) {
@@ -75,7 +77,10 @@ export const Home = () => {
     };
 
     setTransactionList(prev => [...prev, updatedTransaction]);
-    console.log("Updated Transaction List:", [...transactionList, updatedTransaction]);
+    const updatedTransactionList = [...transactionList, updatedTransaction];
+
+    // console.log("Updated Transaction List:", [...transactionList, updatedTransaction]);
+    console.log( updatedTransactionList )
   };
 
 
