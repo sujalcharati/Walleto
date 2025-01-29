@@ -55,13 +55,11 @@ export const TransactionsProvider = ({ children }) => {
     };
 
     setTransactionList((prev) => [...prev, updatedTransaction]);
-    const transactionList = [...transactionList, updatedTransaction];
-    console.log("list", transactionList)
 
-    if (formData.type === "income") {
+    if (formData.type.toLowerCase() === "income") {
       setIncome((prev) => prev + formData.amount);
       setBalance((prev) => prev + formData.amount);
-    } else if (formData.type === "expense") {
+    } else {
       setExpense((prev) => prev + formData.amount);
       setBalance((prev) => prev - formData.amount);
     }
