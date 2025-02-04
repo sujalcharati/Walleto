@@ -4,13 +4,11 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TransactionTable from "./TransactionTable";
-// import { TransactionsContext } from "./TransactionsProvider";
 
 
 export default  function Transaction(){
     const [startDate, setStartDate] = useState(new Date());
-    // const transactionList = useContext(TransactionsContext);
-    // console.log(transactionList);
+  
 
     return (
         <div className="bg-black min-h-screen">
