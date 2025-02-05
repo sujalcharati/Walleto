@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Sphere } from '@react-three/drei';
+import { OrbitControls,  } from '@react-three/drei';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
@@ -57,11 +57,17 @@ import { useEffect, useState } from "react";
                   className="w-10 h-10 rounded-full"
                 />
                 {isOpen && user && user.username && user.email && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
+                  <div className=" absolute mt-11 w-60 bg-black">
                     <div className="px-4 py-2 text-gray-800">
-                      {user.username && <p className="font-medium">{user.username}</p>}
-                      {user.email && <p className="text-sm">{user.email}</p>}
+                      {user.username && <p className="font-medium text-white">{user.username}</p>}
+                      {user.email && <p className="text-sm text-white">{user.email}</p>}
                     </div>
+                    <div className="px-4 py-2 text-white cursor-pointer hover:bg-gray-100" onClick={() => {
+              localStorage.removeItem("authtoken");
+              window.location.href = "/login";
+            }}>
+              Logout
+            </div>
                    
                     </div>
                 )}
