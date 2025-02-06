@@ -17,7 +17,7 @@ const Popover = ({ onClose, onSave }) => {
         amount: parsedAmount,
         description,
         type,
-        date: new Date().toISOString().split('T')[0]
+        date: new Date(document.querySelector('input[type="date"]').value).toISOString().split('T')[0]
       };
 
       try {

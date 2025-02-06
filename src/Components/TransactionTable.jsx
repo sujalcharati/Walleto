@@ -10,9 +10,9 @@ function TransactionTable({  }) {
   console.log("Transaction List:", transactionList);
   return (
     <TableContainer component={Paper} style={{ backgroundColor: '#1f2937', color: 'white' }}>
-      <Table>
-        <TableHead >
-          <TableRow >
+      <Table stickyHeader>
+        <TableHead>
+          <TableRow>
             <TableCell style={{ backgroundColor: 'black', color: 'white', fontFamily: 'Arial, sans-serif', fontWeight: 'bold', fontSize: '16px' }}>
               Description
             </TableCell>
@@ -33,7 +33,7 @@ function TransactionTable({  }) {
               transactionList.map((row, index) => (
                 <TableRow key={index}>
                   <TableCell style={{ backgroundColor: '#374151', color: '#d1d5db', fontFamily: 'Arial, sans-serif', fontSize: '14px' }}>{row.description}</TableCell>
-                  <TableCell style={{ backgroundColor: '#374151', color: '#d1d5db', fontFamily: 'Arial, sans-serif', fontSize: '14px' }}>{row.date}</TableCell>
+                  <TableCell style={{ backgroundColor: '#374151', color: '#d1d5db', fontFamily: 'Arial, sans-serif', fontSize: '14px' }}>{new Date(row.date).toLocaleDateString()}</TableCell>
                   <TableCell style={{ backgroundColor: '#374151' }}>
                     <Chip
                       label={row.type}
