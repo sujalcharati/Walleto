@@ -40,7 +40,7 @@ function TransactionTable({  }) {
                       style={{ backgroundColor: row.type === "expense" ? '#991b1b' : '#065f46', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '14px' }}
                     />
                   </TableCell>
-                  <TableCell style={{ backgroundColor: '#374151', color: '#d1d5db', fontFamily: 'Arial, sans-serif', fontSize: '14px' }}>${typeof row.amount === 'number' ? row.amount.toFixed(2) : row.amount}</TableCell>
+                  <TableCell style={{ backgroundColor: '#374151', color: '#d1d5db', fontFamily: 'Arial, sans-serif', fontSize: '14px' }}>{typeof row.amount === 'number' ? row.amount.toFixed(2) : row.amount}</TableCell>
                 </TableRow>
               ))
             ) : (
