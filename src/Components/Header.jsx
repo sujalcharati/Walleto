@@ -56,21 +56,46 @@ import { useEffect, useState } from "react";
                   src={ "https://www.w3schools.com/howto/img_avatar.png"}
                   className="w-10 h-10 rounded-full"
                 />
-                {isOpen && user && user.username && user.email && (
-                  <div className=" absolute mt-11 w-60 bg-black">
-                    <div className="px-4 py-2 text-gray-800">
-                      {user.username && <p className="font-medium text-white">{user.username}</p>}
-                      {user.email && <p className="text-sm text-white">{user.email}</p>}
+                {isOpen && user && (
+                  <div className="absolute right-0 mt-14 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 origin-top-right z-50">
+                    {/* User Info Section */}
+                    <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700  mt-1"> 
+                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                        {user.username}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                        {user.email}
+                      </p>
                     </div>
-                    <div className="px-4 py-2 text-white cursor-pointer hover:bg-gray-100" onClick={() => {
-              localStorage.removeItem("authtoken");
-              window.location.href = "/login";
-            }}>
-              Logout
-            </div>
-                   
-                    </div>
-                )}
+
+                    {/* Dropdown Menu Items */}
+    <div className="py-1" role="none">
+      <a
+        href="/profile"
+        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150"
+      >
+        <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+        Profile
+      </a>
+      
+      <button
+        onClick={() => {
+          localStorage.removeItem("authtoken");
+          window.location.href = "/login";
+        }}
+        className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150"
+        role="menuitem"
+      >
+        <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        Logout
+      </button>
+    </div>
+  </div>
+)}
               </div>
             </div>
           </div>
