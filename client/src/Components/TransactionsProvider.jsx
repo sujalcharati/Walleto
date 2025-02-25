@@ -10,6 +10,8 @@ export const TransactionsProvider = ({ children }) => {
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
+
+    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("authtoken");
@@ -18,7 +20,7 @@ export const TransactionsProvider = ({ children }) => {
           return;
         }
         const response = await axios.get(
-          "http://localhost:4000/api/transaction/getTransactions",
+          `${API_BASE_URL}/api/transaction/getTransactions`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

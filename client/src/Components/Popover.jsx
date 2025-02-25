@@ -21,10 +21,11 @@ const Popover = ({ onClose, onSave }) => {
       };
 
       try {
+        const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
         const token = localStorage.getItem("authtoken");
         console.log(token);
 
-        const result = await axios.post('http://localhost:4000/api/transaction/transaction', formData, {
+        const result = await axios.post(`${API_BASE_URL}/api/transaction/transaction`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
