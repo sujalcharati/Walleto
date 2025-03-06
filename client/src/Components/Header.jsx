@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
     };
 
     useEffect(() => {
-      const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+      // const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
       const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("authtoken");
@@ -26,7 +26,8 @@ import { useEffect, useState } from "react";
         }
         console.log("Token from storage:", token);
 
-        const response = await axios.get(`${API_BASE_URL}/api/transaction/getTransactions`,  { headers: { Authorization: `Bearer ${token}` }});
+        const response = await axios.get(`https://walleto-be.onrender.com
+/api/transaction/getTransactions`,  { headers: { Authorization: `Bearer ${token}` }});
         setUser(response.data); 
       } catch (error) {
         console.error("Error fetching user data:", error);

@@ -4,7 +4,7 @@ import { TransactionsContext } from "./TransactionsProvider";
 
 function TransactionTable({  }) {
 
-      let {transactionList} = useContext(TransactionsContext);
+  let {transactionList} = useContext(TransactionsContext);
   
     transactionList = Array.isArray(transactionList) ? transactionList : [];
   console.log("Transaction List:", transactionList);

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 export default function Landingpage(){
+  // const API_BASE_URL = import.meta.env.REACT_APP_BACKEND_URL;
+  // console.log(API_BASE_URL);
 
     return(
       <div>

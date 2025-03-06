@@ -18,11 +18,13 @@ export default function Login() {
          const navigate = useNavigate();
        
     const handleSubmit = async (e) => {
-        const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+        // const API_BASE_URL = import.meta.env.REACT_APP_BACKEND_URL;
+        // console.log(API_BASE_URL);
         e.preventDefault();
         console.log("Form submitted", formData);
          try {
-              const result = await axios.post(`${API_BASE_URL}/api/auth/login`,  formData);
+              const result = await axios.post(`https://walleto-be.onrender.com
+/api/auth/login`,  formData);
               const { token } = result.data;
               if (token) {
                 localStorage.setItem('authtoken', token);

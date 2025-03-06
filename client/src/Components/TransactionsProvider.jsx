@@ -11,8 +11,8 @@ export const TransactionsProvider = ({ children }) => {
 
   useEffect(() => {
 
-    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     const fetchData = async () => {
+      // const API_BASE_URL = import.meta.env.REACT_APP_BACKEND_URL;
       try {
         const token = localStorage.getItem("authtoken");
         if (!token) {
@@ -20,7 +20,8 @@ export const TransactionsProvider = ({ children }) => {
           return;
         }
         const response = await axios.get(
-          `${API_BASE_URL}/api/transaction/getTransactions`,
+          `https://walleto-be.onrender.com
+/api/transaction/getTransactions`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
