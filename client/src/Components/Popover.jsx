@@ -25,8 +25,7 @@ const Popover = ({ onClose, onSave }) => {
         const token = localStorage.getItem("authtoken");
         console.log(token);
 
-        const result = await axios.post(`https://walleto-be.onrender.com
-/api/transaction/transaction`, formData, {
+        const result = await axios.post(`/api/transaction/transaction`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

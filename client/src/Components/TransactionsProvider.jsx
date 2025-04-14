@@ -20,8 +20,7 @@ export const TransactionsProvider = ({ children }) => {
           return;
         }
         const response = await axios.get(
-          `https://walleto-be.onrender.com
-/api/transaction/getTransactions`,
+          `/api/transaction/getTransactions`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

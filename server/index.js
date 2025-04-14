@@ -6,8 +6,12 @@ import {connectDB} from './config/db.js';
 import transactionRoutes from "./routes/transaction.js";
 const app = express();
 app.use(express.json());
-app.use(cors());
-app.use(cors({ origin: "https://walleto.vercel.app", credentials: true }));
+// app.use(cors());
+app.use(cors({ origin: ["https://walleto.vercel.app",'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true ,
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
 
 
 dotenv.config();

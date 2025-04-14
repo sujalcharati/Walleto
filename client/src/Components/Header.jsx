@@ -26,8 +26,7 @@ import { useEffect, useState } from "react";
         }
         console.log("Token from storage:", token);
 
-        const response = await axios.get(`https://walleto-be.onrender.com
-/api/transaction/getTransactions`,  { headers: { Authorization: `Bearer ${token}` }});
+        const response = await axios.get(`/api/transaction/getTransactions`,  { headers: { Authorization: `Bearer ${token}` }});
         setUser(response.data); 
       } catch (error) {
         console.error("Error fetching user data:", error);

@@ -23,8 +23,9 @@ export default function Login() {
         e.preventDefault();
         console.log("Form submitted", formData);
          try {
-              const result = await axios.post(`https://walleto-be.onrender.com
-/api/auth/login`,  formData);
+              const result = await axios.post(`/api/auth/login`,  formData,{
+    withCredentials: true,
+  });
               const { token } = result.data;
               if (token) {
                 localStorage.setItem('authtoken', token);
