@@ -29,14 +29,21 @@
 
 
 
-"use client"
+// "use client"
 
 import { motion } from "framer-motion"
 import { ArrowRight, Wallet, TrendingUp, Shield } from "lucide-react"
-
+import { Header } from "./Header"
+import Stats from "./Stats"
+import Footer from "./Footer"
+import Testimonials from "./Testimonials"
+import Pricing from "./Pricing"
+import Features from "./Features"
 function Landingpage() {
   return (
+
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+      <Header/>
       <div className="absolute inset-0 z-0 opacity-30">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-500 rounded-full filter blur-[120px]" />
@@ -76,7 +83,10 @@ function Landingpage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <button className="bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white px-8 py-3 rounded-md font-medium flex items-center justify-center">
+            <button className="bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white px-8 py-3 rounded-md font-medium flex items-center justify-center"
+            onClick={()=>{
+              window.location.href = ('/signup')
+            }}>
               Get Started
               <ArrowRight className="ml-2 h-4 w-4" />
             </button>
@@ -143,6 +153,11 @@ function Landingpage() {
           </motion.div>
         </motion.div>
       </div>
+      <Stats />
+      <Features />
+      <Testimonials />
+      <Pricing />
+      <Footer />
     </section>
   )
 }

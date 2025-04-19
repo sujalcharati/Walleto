@@ -163,8 +163,16 @@ export const Header=()=>{
         <div className="hidden md:flex items-center gap-8">
           <NavLinks />
           <div className="flex items-center gap-3">
-            <button className="text-white hover:text-blue-300 px-4 py-2 rounded-md">Login</button>
-            <button className="bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white px-4 py-2 rounded-md">
+            <button 
+              className="text-white hover:text-blue-300 px-4 py-2 rounded-md"
+              onClick={() => window.location.href = "/login"}
+            >
+              Login
+            </button>
+            <button 
+              className="bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white px-4 py-2 rounded-md"
+              onClick={() => window.location.href = "/signup"}
+            >
               Signup
             </button>
           </div>
@@ -186,10 +194,16 @@ export const Header=()=>{
           <div className="container mx-auto px-4 flex flex-col gap-4">
             <NavLinks mobile />
             <div className="flex flex-col gap-2 pt-4 border-t border-slate-700">
-              <button className="text-white justify-start text-left px-4 py-2 rounded-md hover:bg-slate-700">
+              <button 
+                className="text-white justify-start text-left px-4 py-2 rounded-md hover:bg-slate-700"
+                onClick={() => window.location.href = "/login"}
+              >
                 Login
               </button>
-              <button className="bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white px-4 py-2 rounded-md">
+              <button 
+                className="bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white px-4 py-2 rounded-md"
+                onClick={() => window.location.href = "/login"}
+              >
                 Signup
               </button>
             </div>
