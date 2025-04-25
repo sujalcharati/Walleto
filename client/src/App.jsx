@@ -7,6 +7,7 @@ import Signup from "./Components/Signup";
 import { Home } from "./Components/Home";
 import Transaction from "./Components/Transaction";
 import { TransactionsProvider } from "./Components/TransactionsProvider";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 
 
@@ -16,12 +17,29 @@ function App() {
     <TransactionsProvider>
     <BrowserRouter>
       <Routes>
-        {/* <Header/> */}
         <Route path="/" element={<Landingpage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/transaction" element={<Transaction/>}/>
+        {/* <ProtectedRoute path="/home" element={<Home/>}/> */}
+        <Route 
+        path="/home" 
+        element={
+          <ProtectedRoute>
+            <Home/>
+          </ProtectedRoute>
+        } 
+      />
+        {/* <ProtectedRoute path="/transaction" element={<Transaction/>}/> */}
+
+        <Route
+            path="/transaction"
+            element={
+              <ProtectedRoute>
+                <Transaction />
+              </ProtectedRoute>
+            }
+          />
+          
       </Routes>
     </BrowserRouter>
     </TransactionsProvider>

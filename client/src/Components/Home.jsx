@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Header } from "./Header";
 import { Summary } from "./Summary";
 import Popover from "./Popover";
 import { FiTrendingUp, FiTrendingDown, FiCreditCard } from "react-icons/fi";
 import { TransactionsContext } from "./TransactionsProvider";
+import { Navbar } from "./Navbar";
 
 import "../App.css";
 
@@ -53,7 +53,7 @@ export const Home = () => {
 
   return (
     <div className="bg-gray-800 min-h-screen flex flex-col">
-      <Header />
+      <Navbar/>
       <div className="flex-grow bg-black p-6">
         <h1 className="text-3xl font-bold text-white mb-6">Summary</h1>
         <div className="grid grid-cols-3 gap-4">
