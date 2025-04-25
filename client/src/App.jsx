@@ -20,7 +20,8 @@ function App() {
         <Route path="/" element={<Landingpage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        {/* <ProtectedRoute path="/home" element={<Home/>}/> */}
+
+          
         <Route 
         path="/home" 
         element={
@@ -29,8 +30,7 @@ function App() {
           </ProtectedRoute>
         } 
       />
-        {/* <ProtectedRoute path="/transaction" element={<Transaction/>}/> */}
-
+ 
         <Route
             path="/transaction"
             element={
@@ -39,7 +39,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
+
       </Routes>
     </BrowserRouter>
     </TransactionsProvider>

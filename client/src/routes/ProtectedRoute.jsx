@@ -25,7 +25,7 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('token');
+  const isAuthenticated = localStorage.getItem('authtoken');
   const location = useLocation();
 
   if (!isAuthenticated) {
