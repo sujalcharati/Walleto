@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
  
@@ -8,70 +9,98 @@ export const TransactionsProvider = ({ children }) => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [balance, setBalance] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  // Function to calculate totals from transaction list
+  const calculateTotals = (transactions) => {
+    const incomeTotal = transactions
+      .filter(transaction => transaction.type.toLowerCase() === "income")
+      .reduce((acc, transaction) => acc + Number(transaction.amount), 0);
+    
+    const expenseTotal = transactions
+      .filter(transaction => transaction.type.toLowerCase() === "expense")
+      .reduce((acc, transaction) => acc + Number(transaction.amount), 0);
+    
+    setIncome(incomeTotal);
+    setExpense(expenseTotal);
+    setBalance(incomeTotal - expenseTotal);
+  };
 
-    const fetchData = async () => {
-      // const API_BASE_URL = import.meta.env.REACT_APP_BACKEND_URL;
-      try {
-        const token = localStorage.getItem("authtoken");
-        if (!token) {
-          console.error("No token found in localStorage");
-          return;
-        }
-        const response = await axios.get(
-          `/api/transaction/getTransactions`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        const transactions = response.data.transactions;
-        setTransactionList(transactions);
-
-        const income = transactions
-          .filter((transaction) => transaction.type === "income")
-          .reduce((acc, transaction) => acc + transaction.amount, 0);
-        const expense = transactions
-          .filter((transaction) => transaction.type === "expense")
-          .reduce((acc, transaction) => acc + transaction.amount, 0);
-
-        setIncome(income);
-        setExpense(expense);
-        setBalance(income - expense);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  // Fetch transactions from API
+  const fetchTransactions = async () => {
+    setIsLoading(true);
+    try {
+      const token = localStorage.getItem("authtoken");
+      if (!token) {
+        console.error("No token found in localStorage");
+        setIsLoading(false);
+        return;
       }
-    };
+      
+      const response = await axios.get(
+        `/api/transaction/getTransactions`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    fetchData();
+      const transactions = response.data.transactions || [];
+      setTransactionList(transactions);
+      calculateTotals(transactions);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Initial data load
+  useEffect(() => {
+    fetchTransactions();
   }, []);
 
-  const addTransaction = (formData) => {
+  // Add transaction function
+  const addTransaction = async (formData) => {
     if (!formData || !formData.type || !formData.amount) {
       console.error("Invalid formData:", formData);
       return;
     }
 
-    const updatedTransaction = {
-      ...formData,
-      type: formData.type.charAt(0).toUpperCase() + formData.type.slice(1),
-    };
+    try {
+      const token = localStorage.getItem("authtoken");
+      if (!token) {
+        console.error("No token found in localStorage");
+        return;
+      }
 
-    setTransactionList((prev) => [...prev, updatedTransaction]);
-
-    if (formData.type.toLowerCase() === "income") {
-      setIncome((prev) => prev + formData.amount);
-      setBalance((prev) => prev + formData.amount);
-    } else {
-      setExpense((prev) => prev + formData.amount);
-      setBalance((prev) => prev - formData.amount);
+      const updatedTransaction = {
+        ...formData,
+        type: formData.type.charAt(0).toUpperCase() + formData.type.slice(1),
+        timestamp: new Date().toISOString(),
+      };
+      // Add to local state
+      const newTransactionList = [updatedTransaction, ...transactionList];
+      setTransactionList(newTransactionList);
+      
+      // Recalculate totals
+      calculateTotals(newTransactionList);
+    } catch (error) {
+      console.error("Error adding transaction:", error);
     }
   };
 
   return (
     <TransactionsContext.Provider
-      value={{ transactionList, addTransaction,expense ,income,balance,setIncome,setExpense,setBalance,setTransactionList}}
+      value={{ 
+        transactionList, 
+        addTransaction,
+        income,
+        expense,
+        balance,
+        isLoading,
+      }}
     >
       {children}
     </TransactionsContext.Provider>
   );
 };
+
+

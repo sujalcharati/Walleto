@@ -30,7 +30,10 @@ export default function Login() {
               if (token) {
                 localStorage.setItem('authtoken', token);
                 console.log(token);
-                navigate('/home');
+            
+                    
+                    navigate('/home');
+
                 console.log("Form submitted", result.data);
               } else {
                 console.error("Token not found in response");
