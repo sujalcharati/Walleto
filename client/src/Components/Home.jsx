@@ -57,14 +57,14 @@ export const Home = () => {
     expense,
     balance,
     transactionList,
-    isLoading,
     addTransaction,
-    
+    fetchTransactions,
+    isLoading  
   } = useContext(TransactionsContext);
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [user, setUser] = useState({ username: '', email: '' });
+  const [user, setUser] = useState({ username: '', email: ''});
   const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
@@ -82,8 +82,11 @@ export const Home = () => {
         const response = await axios.get(`/api/transaction/getTransactions`, 
           { headers: { Authorization: `Bearer ${token}` }}
         );
-        
-        setUser(response.data); 
+        console.log(response);
+        setUser(response.data);
+
+        await fetchTransactions();
+    
       
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -94,6 +97,8 @@ export const Home = () => {
 
     fetchUserData();
   }, []);
+
+
 
   // Format currency function
   const formatCurrency = (value) => {

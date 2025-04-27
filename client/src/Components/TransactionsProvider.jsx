@@ -11,6 +11,7 @@ export const TransactionsProvider = ({ children }) => {
   const [balance, setBalance] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
+
   // Function to calculate totals from transaction list
   const calculateTotals = (transactions) => {
     const incomeTotal = transactions
@@ -96,6 +97,8 @@ export const TransactionsProvider = ({ children }) => {
         expense,
         balance,
         isLoading,
+        fetchTransactions,
+        
       }}
     >
       {children}
