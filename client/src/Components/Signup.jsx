@@ -8,6 +8,8 @@ export default function Signup() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,11 +17,15 @@ export default function Signup() {
       ...formData,
       [name]: value,
     });
+    // Clear error when user starts typing
+    if (error) setError("");
   };
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    // const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     e.preventDefault();
+    setError("");
+    setLoading(true);
+    
     try {
       const result = await axios.post(`/api/auth/signup`, formData);
       const { token } = result.data;
@@ -28,10 +34,30 @@ export default function Signup() {
         navigate('/home');
         console.log("Form submitted", result.data);
       } else {
-        console.error("Token not found in response");
+        setError("Token not found in response");
       }
     } catch (error) {
       console.error("Error during signup", error);
+      
+      // Display user-friendly error messages
+      if (error.response) {
+        // Server responded with error
+        if (error.response.status === 409) {
+          setError(error.response.data.msg || "Email already registered. Please login or use a different email.");
+        } else if (error.response.status === 400) {
+          setError(error.response.data.msg || "Invalid input. Please check your details.");
+        } else {
+          setError("Signup failed. Please try again.");
+        }
+      } else if (error.request) {
+        // Request made but no response
+        setError("Cannot connect to server. Please check your internet connection.");
+      } else {
+        // Other errors
+        setError("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,6 +67,14 @@ export default function Signup() {
         <h2 className="text-2xl font-bold mb-6 text-center text-white">
           Signup for Walleto
         </h2>
+        
+        {/* Error Message Display */}
+        {error && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-md">
+            <p className="text-red-400 text-sm">{error}</p>
+          </div>
+        )}
+        
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="form-group">
             <label
@@ -95,10 +129,10 @@ export default function Signup() {
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-
+            disabled={loading}
+            className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Sign Up
+            {loading ? 'Signing up...' : 'Sign Up'}
           </button>
         </form>
         <p className="text-gray-300 py-3">

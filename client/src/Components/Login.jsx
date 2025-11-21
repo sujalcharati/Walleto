@@ -7,6 +7,8 @@ export default function Login() {
         email: "",
         password: "",
     });
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -14,14 +16,17 @@ export default function Login() {
             ...formData,
             [name]: value,
         });
+        // Clear error when user starts typing
+        if (error) setError("");
     };
          const navigate = useNavigate();
        
     const handleSubmit = async (e) => {
-        // const API_BASE_URL = import.meta.env.REACT_APP_BACKEND_URL;
-        // console.log(API_BASE_URL);
         e.preventDefault();
+        setError("");
+        setLoading(true);
         console.log("Form submitted", formData);
+        
          try {
               const result = await axios.post(`/api/auth/login`,  formData,{
     withCredentials: true,
@@ -36,10 +41,27 @@ export default function Login() {
 
                 console.log("Form submitted", result.data);
               } else {
-                console.error("Token not found in response");
+                setError("Token not found in response");
               }
             } catch (error) {
               console.error("Error during login", error);
+              
+              // Display user-friendly error messages
+              if (error.response) {
+                if (error.response.status === 401) {
+                  setError("Invalid email or password. Please try again.");
+                } else if (error.response.status === 404) {
+                  setError("User not found. Please sign up first.");
+                } else {
+                  setError(error.response.data.msg || "Login failed. Please try again.");
+                }
+              } else if (error.request) {
+                setError("Cannot connect to server. Please check your internet connection.");
+              } else {
+                setError("An unexpected error occurred. Please try again.");
+              }
+            } finally {
+              setLoading(false);
             }
 
     };
@@ -48,6 +70,13 @@ export default function Login() {
         <div className="flex justify-center items-center min-h-screen bg-[#16161E]">
             <div className="bg-[#1F1F2E] p-8 rounded-lg shadow-md w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-6 text-center text-white">Login for Walleto</h2>
+                
+                {/* Error Message Display */}
+                {error && (
+                  <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-md">
+                    <p className="text-red-400 text-sm">{error}</p>
+                  </div>
+                )}
                 <form onSubmit={handleSubmit} className="space-y-6">
                   
                     <div className="form-group">
@@ -74,8 +103,13 @@ export default function Login() {
                             className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
                         />
                     </div>
-                    <button type="submit" className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href='/home'>Login</button>
+                    <button 
+                      type="submit" 
+                      disabled={loading}
+                      className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {loading ? 'Logging in...' : 'Login'}
+                    </button>
                 </form>
                 <p className="text-gray-300 py-3">Don't have an account? <a href="/signup" className="text-indigo-400"> signup </a></p>
             </div>
