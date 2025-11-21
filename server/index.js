@@ -7,7 +7,7 @@ import transactionRoutes from "./routes/transaction.js";
 const app = express();
 app.use(express.json());
 // app.use(cors());
-app.use(cors({ origin: ["https://walleto.vercel.app",'http://localhost:3000'],
+   app.use(cors({ origin: ["https://walleto.vercel.app","http://localhost:3000","http://localhost:5173","http://127.0.0.1:5173"],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true ,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
