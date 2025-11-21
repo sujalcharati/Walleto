@@ -1,31 +1,3 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// export default function Landingpage(){
-//   // const API_BASE_URL = import.meta.env.REACT_APP_BACKEND_URL;
-//   // console.log(API_BASE_URL);
-
-//     return(
-//       <div>
-//         <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
-//           <div className="text-lg font-bold">Walleto</div>
-//           <div>
-//             <Link to="/signup" className="mr-4 px-4 py-2 bg-blue-500 rounded hover:bg-blue-700">Signup</Link>
-//             <Link to="/login" className="px-4 py-2 bg-blue-500 rounded hover:bg-blue-700">Login</Link>
-//           </div>
-//         </nav>
-        
-//         <div className="flex flex-col justify-center items-center h-screen">
-//           <div className="font-extrabold text-6xl animate-pulse">
-//             Save your penny through walleto!
-//           </div>
-//           <a href="/signup" className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"> Get Started
-//             </a> 
-           
-          
-//         </div>
-//       </div>
-//     )
-// }
 
 
 
@@ -41,9 +13,9 @@ import Pricing from "./Pricing"
 import Features from "./Features"
 function Landingpage() {
   return (
-
+    <>
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-      <Header/>
+      <Header />
       <div className="absolute inset-0 z-0 opacity-30">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-500 rounded-full filter blur-[120px]" />
@@ -96,7 +68,7 @@ function Landingpage() {
           </motion.div>
         </div>
 
-        <motion.div
+        {/* <motion.div
           className="mt-16 md:mt-24 relative"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -113,10 +85,10 @@ function Landingpage() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Floating cards */}
-          <motion.div
+          {/* <motion.div
             className="absolute -top-6 -left-6 md:top-12 md:-left-12 bg-slate-800 border border-slate-700 p-4 rounded-lg shadow-xl"
             initial={{ x: -20, y: 20, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
@@ -132,9 +104,9 @@ function Landingpage() {
                 <p className="text-green-400 font-bold">+27%</p>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
 
-          <motion.div
+          {/* <motion.div
             className="absolute -bottom-6 -right-6 md:bottom-12 md:-right-12 bg-slate-800 border border-slate-700 p-4 rounded-lg shadow-xl"
             initial={{ x: 20, y: -20, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
@@ -151,14 +123,15 @@ function Landingpage() {
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </motion.div> */}
       </div>
-      <Stats />
+      {/* <Stats />
       <Features />
       <Testimonials />
-      <Pricing />
-      <Footer />
+      <Pricing /> */}
     </section>
+    <Footer />
+    </>
   )
 }
 

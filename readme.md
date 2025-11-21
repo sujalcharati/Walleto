@@ -28,8 +28,7 @@ Designed with a clean, modern dashboard, Wallet allows users to easily manage an
 <br>
 
 ## 📸 Preview
-
-![Wallet App Screenshot](./![alt text](image.png))
+![alt text](image.png)
 
 <br>
 

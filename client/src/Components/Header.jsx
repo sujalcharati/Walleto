@@ -161,7 +161,7 @@ export const Header=()=>{
         </a>
 
         <div className="hidden md:flex items-center gap-8">
-          <NavLinks />
+          {/* <NavLinks /> */}
           <div className="flex items-center gap-3">
             <button 
               className="text-white hover:text-blue-300 px-4 py-2 rounded-md"
@@ -214,27 +214,27 @@ export const Header=()=>{
   )
 }
 
-function NavLinks({ mobile = false }) {
-  const links = [
-    { name: "Features", href: "#features" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Pricing", href: "#pricing" },
-  ]
+// function NavLinks({ mobile = false }) {
+//   const links = [
+//     { name: "Features", href: "#features" },
+//     { name: "Testimonials", href: "#testimonials" },
+//     { name: "Pricing", href: "#pricing" },
+//   ]
 
-  return (
-    <nav className={`${mobile ? "flex flex-col gap-4" : "flex items-center gap-8"}`}>
-      {links.map((link) => (
-        <a
-          key={link.name}
-          href={link.href}
-          className={`text-gray-300 hover:text-white transition-colors ${mobile ? "text-lg" : ""}`}
-        >
-          {link.name}
-        </a>
-      ))}
-    </nav>
-  )
-}
+//   return (
+//     <nav className={`${mobile ? "flex flex-col gap-4" : "flex items-center gap-8"}`}>
+//       {links.map((link) => (
+//         <a
+//           key={link.name}
+//           href={link.href}
+//           className={`text-gray-300 hover:text-white transition-colors ${mobile ? "text-lg" : ""}`}
+//         >
+//           {link.name}
+//         </a>
+//       ))}
+//     </nav>
+//   )
+// }
 
 
 
