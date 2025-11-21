@@ -28,6 +28,7 @@ Designed with a clean, modern dashboard, Wallet allows users to easily manage an
 <br>
 
 ## 📸 Preview
+
 ![alt text](image.png)
 
 <br>
@@ -49,16 +50,19 @@ Designed with a clean, modern dashboard, Wallet allows users to easily manage an
    cd walleto
    ```
 
-2. Install dependencies:
+2. Setup and Run Frontend Client :
    ```bash
+   cd client
    npm install
-   ```
-
-3. Start the development server:
-   ```bash
    npm run dev
    ```
 
+3. Setup and Run Backend Server:
+   ```bash
+   cd server
+   npm install
+   nodemon index.js
+   ```
 4. Open your browser and visit:
    ```
    http://localhost:3000
@@ -80,4 +84,3 @@ Designed with a clean, modern dashboard, Wallet allows users to easily manage an
 
 If you like this project or want to collaborate, feel free to connect!  
 Sujal charati - sujalc024@gmail.com - [LinkedIn](https://www.linkedin.com/in/sujal-charati-2468931ba)
-
