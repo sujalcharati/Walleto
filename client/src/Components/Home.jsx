@@ -79,7 +79,7 @@ export const Home = () => {
         }
 
 
-        const response = await axios.get(`/api/transaction/getTransactions`, 
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/transaction/getTransactions`,
           { headers: { Authorization: `Bearer ${token}` }}
         );
         console.log(response);

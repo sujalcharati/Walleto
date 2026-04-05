@@ -27,7 +27,7 @@ export default function Signup() {
     setLoading(true);
     
     try {
-      const result = await axios.post(`/api/auth/signup`, formData);
+      const result = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`, formData);
       const { token } = result.data;
       if (token) {
         localStorage.setItem('authtoken', token);

@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
         }
         console.log("Token from storage:", token);
 
-        const response = await axios.get(`/api/transaction/getTransactions`,  { headers: { Authorization: `Bearer ${token}` }});
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/transaction/getTransactions`,  { headers: { Authorization: `Bearer ${token}` }});
         setUser(response.data); 
       } catch (error) {
         console.error("Error fetching user data:", error);

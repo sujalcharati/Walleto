@@ -39,7 +39,7 @@ export const TransactionsProvider = ({ children }) => {
       }
       
       const response = await axios.get(
-        `/api/transaction/getTransactions`,
+        `${import.meta.env.VITE_API_URL}/api/transaction/getTransactions`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
